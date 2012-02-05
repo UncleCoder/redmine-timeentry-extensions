@@ -10,13 +10,26 @@
   unless dead_line.nil? or dead_line.empty? or User.current.admin?
     frozed_deadline = dead_line
   end
+  
+  users = {};
+  if User.current.admin?
+    @project.assignable_users.each { |user| users[user.id] = user.name }
+  end
+  
+  i18n_strings = {
+    :field_user => l(:field_user)
+  }
 %>
 <% content_for :header_tags do %>
   <%= javascript_include_tag 'time_entry.js', :plugin => 'timeentry_extensions_plugin' %>
   <script type="text/javascript">
     var time_entry_options = {
+      time_entry: <%= @time_entry.to_json %>,
       frozen_time_entry: <%=frozen_time_entry%>,
-      frozed_deadline: '<%=frozed_deadline%>'
+      frozed_deadline: '<%=frozed_deadline%>',
+      users: <%= users.to_json %>,
+      is_admin: <%= User.current.admin? %>,
+      i18n_strings: <%= i18n_strings.to_json %>
     };
   </script>
 <% end %>
