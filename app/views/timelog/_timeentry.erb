@@ -1,0 +1,38 @@
+<% dead_line = Setting.plugin_timeentry_extensions['dead_line'] %>
+<%
+  frozen_time_entry = false
+  begin
+    frozen_time_entry = @time_entry.spent_on <= Date.parse(dead_line)
+  rescue ArgumentError
+  end
+%>
+<% unless frozen_time_entry %>
+  <% unless dead_line.nil? or dead_line.empty? or User.current.admin? %>
+    <script type="text/javascript">
+      document.observe('dom:loaded', function(){
+        var deadline = new Date('<%=dead_line.to_s%>').getTime();
+        if (! isNaN(deadline)) {
+          Calendar.setup({
+            inputField : 'time_entry_spent_on',
+            ifFormat : '%Y-%m-%d',
+            button : 'time_entry_spent_on_trigger',
+            disableFunc: function(a) {
+              return a.getTime() <= deadline;
+            }
+          });
+        }
+      });
+    </script>
+  <% end %>
+<% else %>
+  <script type="text/javascript">
+    document.observe('dom:loaded', function(){
+      $$('#content form').first().select('select, input').each(function(element){
+        element.disabled = true;
+      });
+      $$('#content form').first().select('.calendar-trigger').each(function(element){
+        element.onclick = null;
+      });
+    });
+  </script>
+<% end %>

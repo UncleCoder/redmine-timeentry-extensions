@@ -8,7 +8,7 @@ end
 
 class Hooks < Redmine::Hook::ViewListener
   render_on :view_timelog_edit_form_bottom,
-             :partial => 'timeentry_calendar',
+             :partial => 'timeentry',
              :layout => false
 end
 
