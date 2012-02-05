@@ -6,6 +6,12 @@ Dispatcher.to_prepare :timeentry_extensions do
   TimeEntry.send(:include, TimeEntryPatch)
 end
 
+class Hooks < Redmine::Hook::ViewListener
+  render_on :view_timelog_edit_form_bottom,
+             :partial => 'timeentry_calendar',
+             :layout => false
+end
+
 Redmine::Plugin.register :timeentry_extensions do
   name 'Redmine Timeentry Extensions plugin'
   author 'Mike Kolganov, Thumbtack Inc.'
