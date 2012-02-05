@@ -1,0 +1,9 @@
+<%= stylesheet_link_tag 'settings.css', :plugin => 'timeentry_extensions_plugin' %>
+<div id="timeentry_ext">
+  <fieldset>
+    <legend>Date before which it is impossible to add or edit time entries</legend>
+    <label for="dead_line">Timeentries dead-line</label>
+    <input id="dead_line" name="settings[dead_line]" value="<%=@settings['dead_line']%>" type="text" size="10" />
+    <%= calendar_for('dead_line') %>
+  </fieldset>
+</div>
