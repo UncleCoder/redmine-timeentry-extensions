@@ -1,6 +1,5 @@
 <% dead_line = Setting.plugin_timeentry_extensions['dead_line'] %> 
 <% unless dead_line.nil? or dead_line.empty? or User.current.admin? %>
-  <%p dead_line%>
   <script type="text/javascript">
     document.observe('dom:loaded', function(){
       var deadline = new Date('<%=dead_line.to_s%>').getTime();
