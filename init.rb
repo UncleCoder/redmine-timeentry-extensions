@@ -15,7 +15,7 @@ end
 Redmine::Plugin.register :timeentry_extensions do
   name 'Redmine Timeentry Extensions plugin'
   author 'Mike Kolganov, Thumbtack Inc.'
-  description 'Timeentry extensions'
+  description 'Freeze of time entries after certain date'
   version '0.0.1'
   #url 'http://example.com/path/to/plugin'
   #author_url 'http://example.com/about'
