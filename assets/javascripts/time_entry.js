@@ -41,9 +41,9 @@ document.observe('dom:loaded', function(){
     },
     
     attach_users_selector: function() {
-      var label = new Element('label', {'for': 'user_id'})
+      var label = new Element('label', {'for': 'override_user_id'})
         .update(this._('field_user'));
-      var select = new Element('select', {name: 'time_entry[user_id]'});
+      var select = new Element('select', {name: 'time_entry[override_user_id]'});
       new Hash(this.users).each(function(pair){
         var user_id = parseInt(pair.first(), 10);
         var user_name = pair.last();

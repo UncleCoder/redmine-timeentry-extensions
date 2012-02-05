@@ -3,6 +3,9 @@ module TimeEntryPatch
   def self.included(base)
     base.send(:include, InstanceMethods)
     base.class_eval do
+      attr_accessor :override_user_id
+      before_save :check_overriden_user_id
+      
       validate_on_update :check_possibility_update
       validate_on_create :check_possibility_create
       before_destroy :check_possibility_destroy
@@ -10,6 +13,13 @@ module TimeEntryPatch
   end
   
   module InstanceMethods
+    
+    def check_overriden_user_id
+      if User.current.admin?
+        overriden_user_id = self.override_user_id.to_i
+        self.user_id = overriden_user_id if overriden_user_id
+      end
+    end
     
     def check_possibility_create 
       dead_line = Setting.plugin_timeentry_extensions['dead_line']
