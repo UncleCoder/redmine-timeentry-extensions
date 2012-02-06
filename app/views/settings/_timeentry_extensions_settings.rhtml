@@ -3,7 +3,7 @@
   <fieldset>
     <legend>Date before which all time entries are frozen</legend>
     <label for="dead_line">Time entries dead-line</label>
-    <input id="dead_line" name="settings[dead_line]" value="<%=@settings['dead_line']%>" type="text" size="10" />
+    <input id="dead_line" name="settings[dead_line]" value="<%=@settings['dead_line']||''%>" type="text" size="10" />
     <%= calendar_for('dead_line') %>
   </fieldset>
 </div>

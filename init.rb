@@ -19,5 +19,5 @@ Redmine::Plugin.register :timeentry_extensions do
   version '0.0.1'
   #url 'http://example.com/path/to/plugin'
   #author_url 'http://example.com/about'
-  settings :partial => 'settings/timeentry_extensions_settings'
+  settings :partial => 'settings/timeentry_extensions_settings', :default => {}
 end
