@@ -2,8 +2,10 @@
   dead_line = Setting.plugin_timeentry_extensions['dead_line']
   
   frozen_time_entry = false
-  begin frozen_time_entry = @time_entry.spent_on <= Date.parse(dead_line)
-  rescue ArgumentError
+  if dead_line
+    begin frozen_time_entry = @time_entry.spent_on <= Date.parse(dead_line)
+    rescue ArgumentError
+    end
   end
 
   frozed_deadline = false
