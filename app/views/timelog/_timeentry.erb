@@ -12,9 +12,10 @@
   unless dead_line.nil? or dead_line.empty? or User.current.admin?
     frozed_deadline = dead_line
   end
-  
+
   users = {};
   if User.current.admin?
+    users[User.current.id] = User.current.name
     @project.assignable_users.each { |user| users[user.id] = user.name }
   end
   

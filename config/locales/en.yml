@@ -6,4 +6,4 @@ en:
         time_entry:
           attributes:
             spent_on:
-              freeze: "in freeze range"
+              freeze: "in already finalized period. Please contact redmine admins or choose another date."

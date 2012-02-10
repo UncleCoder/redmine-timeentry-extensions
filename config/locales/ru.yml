@@ -1,0 +1,9 @@
+# English strings go here for Rails i18n
+ru:
+  activerecord:
+    errors:
+      models:
+        time_entry:
+          attributes:
+            spent_on:
+              freeze: "в завершенном периоде. Пожалуйста, свяжитесь с администраторами или выберите другую дату."

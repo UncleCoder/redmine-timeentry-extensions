@@ -2,16 +2,19 @@ require 'redmine'
 require 'dispatcher'
 require 'time_entry_patch'
 
+# Add patch to TimeEntry model
 Dispatcher.to_prepare :timeentry_extensions do
   TimeEntry.send(:include, TimeEntryPatch)
 end
 
+# Attach view to time entry form
 class Hooks < Redmine::Hook::ViewListener
   render_on :view_timelog_edit_form_bottom,
              :partial => 'timeentry',
              :layout => false
 end
 
+# Register plugin
 Redmine::Plugin.register :timeentry_extensions do
   name 'Redmine Timeentry Extensions plugin'
   author 'Mike Kolganov, Thumbtack Inc.'
