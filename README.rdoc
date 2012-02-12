@@ -1,3 +1,0 @@
-= Redmine Timeentry Extensions plugin
-
-Description coming soon
