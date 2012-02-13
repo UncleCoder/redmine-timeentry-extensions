@@ -17,7 +17,7 @@ module TimeEntryPatch
     def check_overriden_user_id
       if User.current.admin?
         overriden_user_id = self.override_user_id.to_i
-        self.user_id = overriden_user_id if overriden_user_id
+        self.user_id = overriden_user_id if overriden_user_id > 0
       end
     end
     
