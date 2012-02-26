@@ -23,6 +23,6 @@ Install
 
 Author
 ------
-.. image:: http://mikekolganov.github.com/redmine-issue-hot-buttons/thumbtack_logo.png
+.. image:: http://thumbtack-technology.github.com/redmine-issue-hot-buttons/thumbtack_logo.png
 
 `Thumbtack Technology, Inc. <http://thumbtack.net>`_, Mike Kolganov (mike.kolganov@gmail.com)
