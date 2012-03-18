@@ -10,4 +10,5 @@ en:
   issues_controller:
     destroy:
       frozen_time_entries: "Issues contains time entries in already finalized period. Please, contact redmine admins or reassing time entries."
-      
+  timeentry_extensions:
+    frozen_date_in_future: "Users will not be able to log spent time to the current dead-line settings."

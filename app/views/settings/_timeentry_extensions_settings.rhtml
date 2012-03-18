@@ -1,9 +1,20 @@
 <%= stylesheet_link_tag 'settings.css', :plugin => 'timeentry_extensions_plugin' %>
+<%= javascript_include_tag 'settings.js', :plugin => 'timeentry_extensions_plugin' %>
 <div id="timeentry_ext">
   <fieldset>
     <legend>Date before which all time entries are frozen</legend>
     <label for="dead_line">Time entries dead-line</label>
-    <input id="dead_line" name="settings[dead_line]" value="<%=@settings['dead_line']||''%>" type="text" size="10" />
+    <input readonly="readonly" id="dead_line" name="settings[dead_line]" value="<%= @settings ? @settings['dead_line'] : '' %>" type="text" size="10" />
     <%= calendar_for('dead_line') %>
   </fieldset>
 </div>
+<%
+  i18n_strings = I18n.backend.send(:translations)
+  locale = I18n.locale
+%>
+<script type="text/javascript">
+  var time_entry_settings = {
+    today: '<%= Time.now.strftime("%Y-%m-%d") %>',
+    i18n_strings: <%= i18n_strings[locale][:timeentry_extensions].to_json %>
+  };
+</script>
