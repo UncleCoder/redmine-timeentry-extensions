@@ -1,10 +1,12 @@
 require 'redmine'
 require 'dispatcher'
 require 'time_entry_patch'
+require 'issues_controller_patch'
 
 # Add patch to TimeEntry model
 Dispatcher.to_prepare :timeentry_extensions do
   TimeEntry.send(:include, TimeEntryPatch)
+  IssuesController.send(:include, IssuesControllerPatch)
 end
 
 # Attach view to time entry form

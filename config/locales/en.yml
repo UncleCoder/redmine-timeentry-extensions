@@ -7,3 +7,7 @@ en:
           attributes:
             spent_on:
               freeze: "in already finalized period. Please contact redmine admins or choose another date."
+  issues_controller:
+    destroy:
+      frozen_time_entries: "Issues contains time entries in already finalized period. Please, contact redmine admins or reassing time entries."
+      
