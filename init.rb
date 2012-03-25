@@ -21,7 +21,7 @@ Redmine::Plugin.register :timeentry_extensions do
   name 'Timeentry Extensions plugin'
   author 'Mike Kolganov, Thumbtack Inc.'
   description 'Freeze of time entries after certain date'
-  version '0.1.1'
+  version '0.1.2'
   url 'https://github.com/thumbtack-technology/redmine-timeentry-extensions'
   #author_url 'mailto:mike.kolganov@gmail.com'
   settings :partial => 'settings/timeentry_extensions_settings', :default => {}
