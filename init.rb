@@ -1,12 +1,12 @@
 require 'redmine'
 require 'dispatcher'
-require 'time_entry_patch'
-require 'issues_controller_patch'
+require File.dirname(__FILE__) + '/lib/time_entry_patch.rb'
+require File.dirname(__FILE__) + '/lib/issues_controller_patch.rb'
 
 # Add patch to TimeEntry model
 Dispatcher.to_prepare :timeentry_extensions do
-  TimeEntry.send(:include, TimeEntryPatch)
-  IssuesController.send(:include, IssuesControllerPatch)
+  TimeEntry.send(:include, TimeentryExtensions::TimeEntryPatch)
+  IssuesController.send(:include, TimeentryExtensions::IssuesControllerPatch)
 end
 
 # Attach view to time entry form
@@ -22,7 +22,7 @@ Redmine::Plugin.register :timeentry_extensions do
   author 'Mike Kolganov, Thumbtack Inc.'
   description 'Freeze of time entries after certain date'
   version '0.1.1'
-  #url 'http://example.com/path/to/plugin'
+  url 'https://github.com/thumbtack-technology/redmine-timeentry-extensions'
   #author_url 'mailto:mike.kolganov@gmail.com'
   settings :partial => 'settings/timeentry_extensions_settings', :default => {}
 end
