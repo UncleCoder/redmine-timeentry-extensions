@@ -1,0 +1,33 @@
+<%= stylesheet_link_tag 'settings.css', plugin: 'timeentry_extensions' %>
+<%= javascript_include_tag 'settings.js', plugin: 'timeentry_extensions' %>
+<div id="timeentry_ext">
+  <fieldset>
+    <legend>Date before which all time entries are frozen</legend>
+    <div class="field">
+      <%= label_tag 'users_dead_line', 'For regular users' %>
+      <%= 
+        text_field_tag 'settings[users_dead_line]', @settings['users_dead_line'],
+          id: 'users_dead_line', readonly: true, size: 10
+      %>
+      <%= calendar_for('users_dead_line') %>
+    </div>
+    <div class="field">
+      <%= label_tag 'users_dead_line', 'For all users' %>
+      <%= 
+        text_field_tag 'settings[dead_line]', @settings['dead_line'],
+          id: 'dead_line', readonly: true, size: 10
+      %>
+      <%= calendar_for('dead_line') %>
+    </div>
+  </fieldset>
+</div>
+<%
+  i18n_strings = I18n.backend.send(:translations)
+  locale = I18n.locale
+%>
+<script type="text/javascript">
+  window.te_settings = {
+    today: '<%= Time.now.strftime("%Y-%m-%d") %>',
+    i18n: <%= i18n_strings[locale][:timeentry_extensions].to_json.html_safe %>
+  };
+</script>

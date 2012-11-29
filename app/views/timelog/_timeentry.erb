@@ -1,16 +1,22 @@
 <%
-  dead_line = Setting.plugin_timeentry_extensions['dead_line']
+  dead_line       = Date.parse(Setting.plugin_timeentry_extensions['dead_line']) rescue nil
+  users_dead_line = Date.parse(Setting.plugin_timeentry_extensions['users_dead_line']) rescue nil
 
-  frozen_time_entry = false
-  if dead_line and "edit" == params[:action]
-    begin frozen_time_entry = @time_entry.spent_on <= Date.parse(dead_line)
-    rescue ArgumentError
+  dead_line = if dead_line and users_dead_line
+    if User.current.admin?
+      dead_line
+    else
+      dead_line < users_dead_line ? users_dead_line : dead_line
     end
+  elsif dead_line
+    dead_line
+  elsif users_dead_line
+    User.current.admin? ? nil : users_dead_line
   end
 
-  frozed_deadline = false
-  unless dead_line.nil? or dead_line.empty? or User.current.admin?
-    frozed_deadline = dead_line
+  is_frozen = false
+  if dead_line and @time_entry.persisted? and @time_entry.spent_on_was <= dead_line
+    is_frozen = true
   end
 
   users = {};
@@ -19,20 +25,18 @@
     @project.assignable_users.each { |user| users[user.id] = user.name }
   end
   
-  i18n_strings = {
-    :field_user => l(:field_user)
-  }
+  i18n = { field_user: l(:field_user) }
 %>
 <% content_for :header_tags do %>
-  <%= javascript_include_tag 'time_entry.js', :plugin => 'timeentry_extensions_plugin' %>
+  <%= javascript_include_tag 'time_entry.js', :plugin => 'timeentry_extensions' %>
   <script type="text/javascript">
-    var time_entry_options = {
-      time_entry: <%= @time_entry.to_json %>,
-      frozen_time_entry: <%=frozen_time_entry%>,
-      frozed_deadline: '<%=frozed_deadline%>',
-      users: <%= users.to_json %>,
-      is_admin: <%= User.current.admin? %>,
-      i18n_strings: <%= i18n_strings.to_json %>
+    var te_options = {
+      time_entry:       <%= @time_entry.to_json.html_safe %>,
+      dead_line:        '<%= dead_line %>',
+      is_frozen:        <%= is_frozen %>,
+      users:            <%= users.to_json.html_safe %>,
+      is_admin:         <%= User.current.admin? %>,
+      i18n:     <%= i18n.to_json.html_safe %>
     };
   </script>
 <% end %>

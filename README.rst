@@ -14,15 +14,21 @@ Licensed under GNU Lesser General Public License, version 2.1
 
 Welcome to new contributors, especially translators
 
+Compatibility
+-------------
+
+Redmine 2.1.x
+
+
 Install
 -------
 
 1. Download plugin
-2. Extract to your Redmine into vendor/plugins/timeentry_extensions_plugin
+2. Extract to your Redmine into vendor/timeentry_extensions
 3. Restart web server
 
 Author
 ------
 .. image:: http://thumbtack-technology.github.com/redmine-issue-hot-buttons/thumbtack_logo.png
 
-`Thumbtack Technology, Inc. <http://thumbtack.net>`_, Mike Kolganov (mike.kolganov@gmail.com)
+`Thumbtack Technology <http://thumbtack.net>`_, Mike Kolganov (mike.kolganov@gmail.com)

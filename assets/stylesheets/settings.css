@@ -5,3 +5,14 @@
   #timeentry_ext label:after {
     content: ':';
   }
+#timeentry_ext .field {
+  margin-bottom: 5px;
+}
+#timeentry_ext input[type="text"] {
+  border: 1px solid gray;
+  padding: 1px 2px;
+}
+  #timeentry_ext input[type="text"].error {
+    background-color: #FFE3E3;
+    border-color: #D00;
+  }
